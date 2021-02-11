@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" lang="es-MX" xml:lang="es-MX">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/contratacionesabiertas/static/bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="/contratacionesabiertas/static/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/contratacionesabiertas/static/bower_components/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet">
+    <link rel='stylesheet' href='/contratacionesabiertas/static/stylesheets/main.css' />
+    <link rel='stylesheet' href='/contratacionesabiertas/static/stylesheets/style_d3bubble.css' />
+    <link rel="stylesheet" type="text/css" href="/contratacionesabiertas/static/bower_components/jqplot/jquery.jqplot.css" />
+    <link rel="stylesheet" href="/contratacionesabiertas/static/stylesheets/dashboard.css">
+    <link rel="import" href="<%= process.env.CDN_URL %>/bower_components/polymer/polymer.html">    
+    <link rel="import" href="/contratacionesabiertas/static/inai-navbar/dgm-navbar.html">
+    <link rel="import" href="/contratacionesabiertas/static/inai-footer/dgm-footer.html">
+    <link rel="stylesheet" type="text/css" href="/contratacionesabiertas/static/bower_components/tooltipster/dist/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="/contratacionesabiertas/static/bower_components/tooltipster-follower/dist/css/tooltipster-follower.min.css" />
+	
+	<style no-shim>        
+        .navbar-default   { background-color: #FFFFFF; border: none; top: 158.5px; }
+
+        p{
+            text-align: justify;
+        }
+        table,th,td{
+            border: 1px solid black;
+        }
+        table{
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        th,td{
+            padding: 15px 15px 0;
+            text-align: center;
+        }
+        th{
+            color: #FFFFFF;
+            background-color: #4d4d4d;
+        }
+        .th2{
+            padding: 15px 15px 15px;
+            background-color: #e04444;
+        }
+        .th3{
+            padding: 15px 15px 15px;
+            background-color: #8e7cc3;
+        }
+        .td2{
+            padding: 15px 15px 15px;
+            background-color: #f3f3f3;
+        }
+        .td3{
+            padding: 15px 15px 15px;
+            background-color: #f3f3f3;
+        }
+        .menuTopBar{
+            text-align: center;
+            background-color: #00bfa5;
+            position: fixed;
+            z-index: 4;
+            top: 106.5px;
+            max-width: none;
+            width: 100%;
+            padding: 0 10% 0;
+        }
+        .menuTopBar a{
+            height: 52px;
+            text-decoration: none;
+            font-size: 15px;
+            vertical-align: middle;
+            color: #FFFFFF;
+        }
+        .menuTopBar .botonMenuTop:hover{
+            background-color: #008e76;
+        }
+        .menuTopBar .botonMenuTop{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background-color: #00bfa5;
+            color: #ffffff;
+        }
+        @media (max-width: 991px) {
+            body {
+                margin: 150px 0 0;
+            }
+            .menuTopBarS{
+                padding: 0 0 0;
+                background-color: black;
+            }
+        }
+    </style>
+
+    <title>Política de publicación</title>
+</head>
+
+<body>
+    <dgm-navbar></dgm-navbar>
+    
+    <div class="menuTopBar menuTopBarS">
+        <div class="col-xs-3" style="padding: 0 0 0;">
+            <a href="/contratacionesabiertas/contratos/" class="botonMenuTop">Inicio</a>
+        </div>
+        <div class="col-xs-3" style="padding: 0 0 0;">
+            <a href="/contratacionesabiertas/politicadepublicacion" class="botonMenuTop"  style="background-color: #008e76">Política de publicación</a>
+        </div>
+        <div class="col-xs-3" style="padding: 0 0 0;">
+            <a href="/contratacionesabiertas/implementa" class="botonMenuTop">Implementa el EDCA-MX</a>
+        </div>
+        <div class="col-xs-3" style="padding: 0 0 0;">
+            <a href="https://datos.gob.mx/busca/organization/inai" class="botonMenuTop" target="_blank">Datos abiertos</a>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-top hidden-sm hidden-xs">              
+            <div class="container">   
+                    <ul class="breadcrumb">
+                        <li><a href="/contratacionesabiertas/"><i class="glyphicon glyphicon-home"></i></a></li>
+                        <li><a href="/contratacionesabiertas/contratos/">Comisión de Transparencia y Acceso a la Información del Estado de Nuevo León</a></li>
+                        <li><a href="#">Política de publicación</a></li>
+                    </ul>
+            </div>               
+     </nav>
+    
+    <div class="breadcrumb-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                 <!--     <li><a href="/contratacionesabiertas/"><i class="glyphicon glyphicon-home"></i></a></li>
+                      <li><a href="/contratacionesabiertas/contratos/">Comisión de Transparencia y Acceso a la Información del Estado de Nuevo León</a></li>
+                      <li><a href="#">Acerca</a></li>  -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 post">
+                <div ng-bind-html="content" class="content ng-binding">
+                    <h1 style="text-align: center;">Política de publicación de Contrataciones Abiertas COTAI.</h1>
+                    <br><br>
+                </div>
+
+                <h4><strong>Propósito de la publicación</strong></h4>
+                <br>
+                <p>Que la población tenga la posibilidad de consultar y cuente con la oportunidad de disponer de información de calidad derivada de los procedimientos de contrataciones que celebre la Comisión de Transparencia y Acceso a la Información del Estado de Nuevo León (COTAI), a través de la publicación de los datos que se generen conforme al Estándar de Datos de Contrataciones Abiertas en México (EDCA-MX), esto, con el propósito de promover el acceso a la información, generar conocimiento público útil, así como propiciar la vigilancia ciudadana.</p>
+                <br>
+                <h4><strong>Uso de los datos.</strong></h4>
+                <br>
+				<p>La COTAI a través de la publicación de los datos, busca que estos se consulten, analicen y reutilicen para:</p>
+                <br>
+                <ol>
+                    <li>Homologar datos a un nivel que sea claro y sencillo de entender para la población. </li>
+                    <li>Proporcionar una herramienta que permita la reutilización de la información a fin de buscar nuevas e innovadoras aplicaciones que permitan generar conocimiento publico útil.</li>
+                    <li>Fomentar una cultura de monitoreo, control y evaluación de los procesos de contratación que genera la COTAI.</li>
+                    <li>Propiciar mecanismos de participación ciudadana que permitan una retroalimentación para buscar una mejora continua y la rendición de cuentas.</li>
+                </ol>
+                <br>
+                <h4><strong>Generación de los datos.</strong></h4>
+                <p>Actualmente los datos generados derivados de los procedimientos de contratación de la COTAI se realizan conforme a lo establecido en la Ley de Adquisiciones Arrendamientos y Contratación de Servicios del Estado de Nuevo León y tienen la directriz de los procesos internos de “Gestión de Compra y Evaluación de Proveedores”. La información producida no cuenta con un sistema que sea interoperable con los estándares del EDCA-MX por lo que los procesos de adaptación y captura al estándar se realizan de forma manual y se actualizarán de forma trimestral.
+                </p>
+                <br>
+                <h4><strong>Publicación</strong></h4>
+                <p>La publicación de la información iniciará durante el mes de diciembre del año 2020 y partirá en dos etapas:</p>
+				<br>
+                <ol>
+                    <li>Publicación exclusiva de procedimientos de contratación que deriven en Contratos.</li>
+					<br>
+					<p>La publicación partirá de los procedimientos de contratación que se deriven en la celebración de contratos del ejercicio fiscal 2020 y 2021, en concordancia con lo reportado en la fracción XXIX del artículo 95 de la Ley de Transparencia y Acceso a la Información Pública del Estado de Nuevo León.</p>
+                    <li>Publicación de todos los procedimientos de contratación.</li>
+					<br>
+					<p>Derivado del aprendizaje desarrollado en la primera etapa de implementación y estandarización del EDCA-MX en la COTAI, se dispone que la publicación de la información será de todos de los procedimientos de contratación a partir del ejercicio fiscal 2022 en concordancia con lo reportado en la fracción XXIX del artículo 95 de la Ley de Transparencia y Acceso a la Información Pública del Estado de Nuevo León.</p>
+				</ol>
+                <br>
+                <h4><strong>Actualización de la información.</strong></h4>
+                <p>Durante el mes de diciembre del año 2020 se captura el primer conjunto de datos conforme a la primera etapa de publicación. De igual forma la actualización de la información se generará de manera trimestral.
+                </p>
+                <h4 style="text-align: center">Registro de proyección de actualización de la información 1°etapa.</h4>
+                <table>
+                        <tr>
+                            <th>Periodo por publicar</th>
+                            <th>Descripción</th>
+                            <th>Periodo de actualización.</th>
+                        </tr>
+                        <tr>
+                            <td>Enero-septiembre 2020</td>
+                            <td>Publicación correspondiente a primera etapa.</td>
+                            <td>Diciembre 2020</td>
+                        </tr>
+                        <tr>
+                            <td>Octubre-diciembre 2020</td>
+                            <td>Actualización de información.</td>
+                            <td>Enero-febrero 2021</td>
+                        </tr>
+                        <tr>
+                            <td>Enero-marzo 2020</td>
+                            <td>Actualización de información.</td>
+                            <td>Abril-Mayo 2021</td>
+                        </tr>
+                        <tr>
+                            <td>Abril-junio 2020</td>
+                            <td>Actualización de información.</td>
+                            <td>Julio-agosto 2021</td>
+                        </tr>
+                        <tr>
+                            <td>Julio-septiembre 2020</td>
+                            <td>Actualización de información.</td>
+                            <td>Octubre-noviembre 2021</td>
+                        </tr>
+						<tr>
+                            <td>Octubre-diciembre 2020</td>
+                            <td>Actualización de información.</td>
+                            <td>Enero-febrero 2022</td>
+                        </tr>
+                </table>
+                <br>
+                <br>
+                <h4><strong>Responsables de la Información.</strong></h4>
+                <p>La información publicada será exclusivamente de los procedimientos de contratación de la 
+				   Comisión de Transparencia y Acceso a la Información del Estado de Nuevo León.
+                </p>
+                <p>
+                    Al interior de la COTAI, la Dirección de Administración y Finanzas será la encargada de 
+					generar, capturar, validar, publicar y actualizar la información que se derive de los 
+					procedimientos de contratación. Por otra parte, la Dirección de Gobierno Abierto será la 
+					encargada de dar seguimiento y soporte al personal designado como capturista
+                </p>
+                <br>
+                <h4><strong>Accediendo a los datos.</strong></h4>
+                <p>
+                    La información estará disponible en la plataforma  de Contrataciones Abiertas COTAI.
+                </p>
+				<br>
+                <h4><strong>Alcance de los datos.</strong></h4>
+                <p>
+                    El alcance de los datos estará sujeto a los compromisos de publicación y será conforme a lo siguiente:
+                </p>
+                <table>
+                        <tr>
+                            <th>Periodo</th>
+                            <th>Sujeto Obligado</th>
+                            <th>Tipos de procedimiento</th>
+							<th>Montos.</th>
+                        </tr>
+						<tr>
+                            <td>A partir del ejercicio 2020 en adelante</td>
+                            <td>Comisión de Transparencia y Acceso a la Información del Estado de Nuevo León</td>
+                            <td>
+							<ul>
+								<li>Licitación pública.</li>
+								<li>Invitación Restringida.</li>
+								<li>Adjudicación directa.</li>
+							</ul>
+							</td>
+							<td>Conforme a la Ley de Egresos del Estado de Nuevo León para el Ejercicio Fiscal del ejercicio en turno.</td>
+                        </tr>
+                </table>
+                <br>
+                <br>
+                <h4><strong>Información de referencia.</strong></h4>
+                <p>La información que a continuación se describe, ayudará a contextualizar los datos para la persona interesada.
+                </p>
+				<h4><strong>Actores involucrados.</strong></h4>
+                <p>Para identificar fielmente a todos los actores involucrados en el procedimiento de contratación, se utiliza la lista de códigos “Registro Federal de Contribuyentes (RFC)”, tanto para personas físicas como morales.
+                </p>				
+				<h4><strong>Items.</strong></h4>
+                <p>Para identificar los ítems contratados según el EDCA, se utiliza la lista de códigos <a href="https://sites.google.com/site/cnetcucop/" target="_blank">“Clasificador por objeto de gasto”</a> que permite registrar de manera ordenada, sistemática y homogénea las compras, los pagos y las erogaciones autorizados en capítulos, conceptos y partidas.
+				</p>				
+                <h4><strong>Extensiones.</strong></h4>
+                <p>La COTAI no ha añadido ninguna extensión adicional, la configuración se ha quedado conforme a la base del Estándar de Datos de Contrataciones Abiertas en México (EDCA-MX) que formula el INAI.
+                </p>				
+                <h4><strong>Datos de contacto.</strong></h4>
+                <p>Para cualquier duda o aclaración sobre el proyecto, se dispone del siguiente contacto: <a href="mailto:gobiernoabierto@cotai.org.mx">gobiernoabierto@cotai.org.mx</a>.
+                </p>
+				<p>Licencia de publicación</p>
+                <p>
+                    Estos datos pueden ser utilizados, reutilizados y redistribuidos por cualquier usuario y para 
+					cualquier fin, de acuerdo con el “Decreto por el que se establece la regulación en materia de 
+					Datos Abiertos”, publicado el 20 de febrero de 2015, en el Diario Oficial de la Federación:
+					
+					Artículo Primero. - [...] los datos de carácter público, generados por las dependencias y 
+					entidades de la Administración Pública Federal y por las empresas productivas del Estado, 
+					se pondrán a disposición de la población como datos abiertos, con el propósito de facilitar su 
+					acceso, uso, reutilización y redistribución para cualquier fin, conforme a los ordenamientos 
+					jurídicos aplicables. [...]
+                </p>
+                <p>Consulta los <a href="https://datos.gob.mx/libreusomx" target="_blank">Términos de Libre Uso MX</a>.</p>
+                <br>
+                <h4><strong>Documentación Adicional.</strong></h4>
+                <br>
+                <p>
+                    A continuación, se dispondrá de la información que resulte de interés sobre la publicación de las contrataciones abiertas. 
+                </p>
+                <br>
+				<p>
+                    Disposiciones administrativas para la implementación.
+				<ul>
+                    <li><a href="https://www.cotai.org.mx/descargas/contrataciones_abiertas/Compromiso_publicacion_CA_COTAINL" target="_blank">Compromiso de publicación.</a></li>
+                </ul>
+                </p>               
+                <h4><strong>Marco normativo.</strong></h4>
+                <ul>
+                    <li>Constitución Política de los Estados Unidos Mexicanos</li>
+                    <li>Constitución Política del Estado Libre y Soberano de Nuevo León</li>
+                    <li>Ley de Transparencia y Acceso a la Información Pública del Estado de Nuevo León.</li>
+                    <li>Ley de Adquisiciones Arrendamientos y Contratación de Servicios del Estado de Nuevo León.</li>
+                    <li>Ley de Egresos del Estado de Nuevo León para el Ejercicio Fiscal 2020.</li>
+                </ul>
+                <br>
+				<p>
+                    Fecha de actualización:10/12/2020 
+                </p>
+                <br>
+            </div>
+        </div>
+    </div>
+	<br>
+	<br>
+
+    <dgm-footer></dgm-footer>
+    <script src="/contratacionesabiertas/static/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/contratacionesabiertas/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<%= process.env.CDN_URL %>/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+</body>
+
+</html>
