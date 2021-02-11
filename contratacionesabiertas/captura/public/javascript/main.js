@@ -594,7 +594,12 @@ $('#genericModal').on('show.bs.modal', function (event) {
                             success:  function (data) {
                                 alert(data.description);
                                 $('[name="numberoftenderers"]').val(data.total);
-                                if (data.status === 'Ok'){ modal.modal('hide');}
+                                if (data.status === 'Ok'){ 
+                                    modal.modal('hide');
+                                }
+                            },
+                            error: function (data) {
+                                alert("No es posible eliminar el actor porque cuenta información asociada a los formularios de Solicitud de cotizaciones y Cotizaciones.");
                             }
                         })
                     }
@@ -2814,6 +2819,19 @@ $('#genericModal').on('show.bs.modal', function (event) {
             modal.find('#modal_content').html("");
             modal.find('#modal_content').load('/user-profile', { id : button.data('user_id')}, function () {
                 $('#form_update_user_profile').submit(function (event) {
+                    $.post('/update/user', $(this).serialize()).done(function (data) {
+                        alert(data.description);
+                        if (data.status === 'Ok'){ modal.modal('hide');}
+                    });
+                    event.preventDefault();
+                });
+            });
+            break;
+        case "edit_user_admin":
+            modal.find('.modal-title').text('Actualizar información del usuario');
+            modal.find('#modal_content').html("");
+            modal.find('#modal_content').load('/user-profile-admin', { id : button.data('user_id')}, function () {
+                $('#form_update_user_profile_admin').submit(function (event) {
                     $.post('/update/user', $(this).serialize()).done(function (data) {
                         alert(data.description);
                         if (data.status === 'Ok'){ modal.modal('hide');}

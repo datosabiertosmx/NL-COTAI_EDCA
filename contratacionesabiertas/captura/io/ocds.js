@@ -131,9 +131,9 @@ module.exports = {
                         party.address = {};
                         party.contactPoint = {};
                         party.roles = [];
-                        var roles = ["buyer","procuringEntity","supplier","tenderer","funder", "enquirer",
+                        var roles = ["buyer","procuringEntity","supplier","tenderer","guarantor", "enquirer",
                             "payer","payee","reviewBody", "attendee", "official", "invitedSupplier", "issuingSupplier",
-							"requestingunit", "contractingunit", "technicalunit"];
+							"requestingunit", "contractingunit", "technicalunit", "responsibleunit"];
 
                         if( checkValue(array[i].naturalperson) ){
 				        if(array[i].naturalperson == true) { 
@@ -451,9 +451,6 @@ module.exports = {
                         case 'Adjudicación directa':
                             proc = 'Adjudicación directa';
                             break;
-                        case 'Adhesiones y membresías':
-                            proc = 'Adhesiones y membresías';
-                            break;
                     }
 
                     return proc;
@@ -616,7 +613,7 @@ module.exports = {
                 deleteNullProperties( award, true );
 
                 if (JSON.stringify(award) !== JSON.stringify({})){
-                    release. awards = [ award ];
+                    release.awards = [ award ];
                 }
 
                 //CONTRACTS

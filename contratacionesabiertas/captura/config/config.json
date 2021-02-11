@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "cotai_captura",
-    "password": "Metro2033",
+    "username": "prueba_captura",
+    "password": "P4ssw0rd",
     "database": "edca",
     "host": "localhost",
     "dialect": "postgres",

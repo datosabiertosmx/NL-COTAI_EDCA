@@ -39,7 +39,7 @@ function ValidateProcess(cpid, db) {
                 addWarning(message,'Nombre común', !isNotNullOrEmpty(party.name), 'Obligatorio');
                 addWarning(message,'Identificador del actor', !isNotNullOrEmpty(party.id), 'Obligatorio');
                 addWarning(message,'Identificador', !party.identifier || !isNotNullOrEmpty(party.identifier.id), 'Obligatorio');
-                addWarning(message,'Nombre o razón social', !party.identifier || !isNotNullOrEmpty(party.identifier.legalName), 'No se ha especificado el nombre o razón social del actor en cuestión.');
+                //addWarning(message,'Nombre o razón social', !party.identifier || !isNotNullOrEmpty(party.identifier.legalName), 'No se ha especificado el nombre o razón social del actor en cuestión.');
                 addWarning(message,'Calle y número', !party.address || !isNotNullOrEmpty(party.address.streetAddress), 'No se ha indicado la calle y número del domicilio fiscal del participante. Por ejemplo: Insurgentes sur 3211. En caso de no contar con el dato DEJAR EL CAMPO EN BLANCO. No colocar datos como \'N/A\', \'N/D\' o  \'Sin Dato\'.');            
                 addWarning(message,'Delegación o municipio', !party.address || !isNotNullOrEmpty(party.address.locality), 'No se ha señalado la alcaldía o municipio del domicilio fiscal del participante. Por ejemplo: Coyoacán. En caso de no contar con el dato DEJAR EL CAMPO EN BLANCO. No colocar datos como \'N/A\', \'N/D\' o  \'Sin Dato\'.');
                 addWarning(message,'Entidad federativa', !party.address || !isNotNullOrEmpty(party.address.region), 'No se ha especificado la entidad federativa del domicilio fiscal del participante. Por ejemplo: Ciudad de México. En caso de no contar con el dato DEJAR EL CAMPO EN BLANCO. No colocar datos como \'N/A\', \'N/D\' o  \'Sin Dato\'.');
@@ -122,6 +122,8 @@ function ValidateProcess(cpid, db) {
 
                 if(Object.keys(messageCapture).length > 1) captureAwards.push(messageCapture);
             });
+        } else{
+            capture['Adjudicaciones'] = 'No se ha registrado ningúna adjudicación';
         }
 
         // validacion de contratos
@@ -163,6 +165,8 @@ function ValidateProcess(cpid, db) {
                 messageCapture = clean(messageCapture);
                 if(Object.keys(messageCapture).length > 1) captureContracts.push(messageCapture);
             });
+        } else {
+            capture['Contratos'] = 'No se ha especificado ningún contrato';
         }
 
         capture = clean(capture);
@@ -259,6 +263,7 @@ function ValidateProcess(cpid, db) {
     
     let generateResume = function(cpid, json){
         let buyer =  json.parties ? json.parties.filter(p => p.roles && p.roles.indexOf('buyer') !== -1)[0]: undefined;
+        let requestingUnit = json.parties ? json.parties.filter(p => p.roles && p.roles.indexOf('requestingUnit') !== -1)[0]: undefined;
         let empty = 'Sin dato';
         let amount = 0;
         let amount2 = 0;
@@ -277,8 +282,8 @@ function ValidateProcess(cpid, db) {
 
         let resume = {
             registry: cpid,
-            unitAdministrative: buyer ? buyer.name || empty : empty,
-            identifier: buyer ? buyer.id || empty : empty,
+            unitAdministrative: requestingUnit ? requestingUnit.name || empty : empty,
+            identifier: requestingUnit ? requestingUnit.id || empty : empty,
             date: json.date,
             name: json.tender ? json.tender.title || empty : empty,
             type: json.tender ? json.tender.procurementMethodDetails || empty : empty,
@@ -318,6 +323,7 @@ function ValidateProcess(cpid, db) {
             },
             parties: {
             	buyer: buyer !== undefined ? 'Registrado' : 'No registrado',
+                requestingUnit: requestingUnit !== undefined ? 'Registrado' : 'No registrado',
                 procuringEntity: json.parties && json.parties.filter(p => p.roles && p.roles.indexOf('procuringEntity') !== -1).length > 0 ? 'Registrado' : 'No registrado',
                 supplier: json.parties && json.parties.filter(p => p.roles &&  p.roles.indexOf('supplier') !== -1).length > 0 ? 'Registrado' : 'No registrado',
                 payer: json.parties && json.parties.filter(p => p.roles &&  p.roles.indexOf('payer') !== -1).length > 0 ? 'Registrado' : 'No registrado',
@@ -384,17 +390,22 @@ function ValidateProcess(cpid, db) {
     }
 
     let getEtapaCaptura = json => {
-        if(json.contracts.find(x => x.implementation && x.implementation.status)) {
-            return 'Implementación'
-        } else if(json.contracts.find(x => x.status)) {
-            return 'Contrato'
-        } else if(json.awards.find(x => x.status)){
-            return 'Adjudicación'
-        } else if(json.tender.status) {
-            return 'Licitación'
-        } else{
+        if(json.contracts !== undefined && json.awards !== undefined){
+            if(json.contracts.find(x => x.implementation && x.implementation.status)) {
+                return 'Implementación'
+            } else if(json.contracts.find(x => x.status)) {
+                return 'Contrato'
+            } else if(json.awards.find(x => x.status)){
+                return 'Adjudicación'
+            } else if(json.tender.status) {
+                return 'Licitación'
+            } else{
+                return 'Planeación'
+            }
+        }else{
             return 'Planeación'
         }
+        
     }
 
     let countLength = json => {

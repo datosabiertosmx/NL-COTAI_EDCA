@@ -4,6 +4,17 @@
  <!DOCTYPE html>
  <html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" lang="es-MX" xml:lang="es-MX">
  <head>
+     <!-- Google Analytics -->
+     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KNYE7DF2RM"></script>
+     <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+
+         gtag('config', 'G-KNYE7DF2RM');
+     </script>
+     <!-- End Google Analytics -->
+
      <meta name="viewport" content="width=device-width, initial-scale=1">
      <link rel="stylesheet" href="/contratacionesabiertas/static/bower_components/font-awesome/css/font-awesome.min.css">
      <!-- Bootstrap core CSS -->
@@ -18,217 +29,14 @@
      <link rel="import" href="<%= process.env.CDN_URL %>/bower_components/polymer/polymer.html"> 
      <link rel="import" href="/contratacionesabiertas/static/inai-navbar/dgm-navbar.html">
      <link rel="import" href="/contratacionesabiertas/static/inai-footer/dgm-footer.html">
- 
-     <style>
-         .arc text {
-             font: 10px sans-serif;
-             text-anchor: middle;
-         }
- 
-         .arc path {
-             stroke: #fff;
-         }
- 
- 
-         .progress {
-             margin-bottom: 0;
-         }
- 
-         .container {
-             max-width: 1100px;
-         }
-         
-         .container-me {
-             width: 900px;
-             font-size: 12px;
-             color: #777;
-         }  
-          
- 
-         .tooltip {
-             position: absolute;
-             text-align: center;
-             width: 100px;
-             height: 50px;
-             padding: 8px;
-             margin-top: -20px;
-             font: 10px Open Sans;/*sans-serif;*/
-             background: white; /*#ddd;*/
-             pointer-events: none;
-         }
- 
-         .nav-pills{
-             padding-bottom: 25px;
-             padding-top: 20px;
-         }
- 
-         .nav-pills > li {
-             padding-bottom: 10px;
-         }
- 
-         .tooltipster-default{
-             border-radius: 3px;
-             border: none;
-             background: white;
-         }
- 
- 
-         .tooltipster-default .tooltipster-content {
-             font: Open Sans;
-             font-size: 12px;
-             border: none;
-             color: black;
-             background: white;
-             /*padding: 1em 1em 1em 1em;
-             overflow: hidden;*/
-         }
- 
-         .tooltipster-default .tooltipster-box {
-             border: none;
-         }
- 
-         .search-form > input[type="text"] {
-             width: 37%;
-         }
- 
-         .search-form > .form-control.bootstrap-select {
-             width: auto;
-         }
- 
-         .search-form > .form-control.bootstrap-select > .btn {
-             left: 0;
-             transform: none;
-         }
- 
-         .stages-icons img.pulse {
-             animation: blinker 3s linear infinite;
-         }
- 
-         .stages-icons img.disabled {
-             filter: grayscale(100%);
-         }
- 
-         @keyframes blinker {
-             50% {
-                 opacity: 0;
-             }
-         }
- 
-         .pru2 {
-             text-align:center;
-         }
- 
-         .pru4 h3 {
-             margin-top: 0px;
-         }
- 
-         .no-cursor {
-             pointer-events:none;
-         }
- 
-         .pru3 {
-             width: 98%; 
-             text-align:right;
-         }
- 
-         @media (min-width: 991px) {
-             .pru2 {
-                 width: 60%;
-             }
- 
-             ul.ul-horizontal {
-                 text-align: center;
-             }
- 
-             ul.ul-horizontal > li {
-                 display: inline;
-                 margin: 0px 5px;
-                 cursor: pointer;
-             }
-         }
- 
-         @media (max-width: 991px) {
-             .pru2 h3 {
-                 font-size: 16px;
-             }
-         }
- 
-         ul.ul-horizontal > li.active {
-             text-decoration: line-through;
-         }
- 
-         .label {
-             display: inline-block;
-         }
-
-         .menuTopBar{
-            text-align: center;
-            background-color: #00bfa5;
-            position: fixed;
-            z-index: 4;
-            top: 106.5px;
-            max-width: none;
-            width: 100%;
-            padding: 0 10% 0;
-        }
-
-        .menuTopBar a{
-            height: 52px;
-            text-decoration: none;
-            font-size: 15px;
-            vertical-align: middle;
-            color: #FFFFFF;
-        }
-        .menuTopBar .botonMenuTop:hover{
-            background-color: #008e76;
-        }
-        .menuTopBar .botonMenuTop{
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: none;
-            background-color: #00bfa5;
-            color: #ffffff;
-        }
-        .menuTopBar select{
-            background-color: #00bfa5;
-            border-color: #ffffff;
-            color: #ffffff;
-            vertical-align: -webkit-baseline-middle;
-            margin-top: 11px;
-            width: 50%;
-            height: 30px;
-        }
-
-        @media (max-width: 991px) {
-            .bgMovil {
-                height: 40em;
-                background-size: cover;
-            }
-            .menuTopBar select{
-                width: 100%;
-                font-size: 0.7em;
-            }
-            .menuTopBarS{
-                padding: 0 0% 0;
-            }
-        }
-         </style>
- 
+     <script src="/contratacionesabiertas/static/javascripts/common.js"></script> 
      <title><%= title %></title>
  </head>
  <body>
  <dgm-navbar></dgm-navbar>
  <div class="container menuTopBar menuTopBarS">
-    <!-- <div class="col-xs-1">
-    </div> -->
     <div class="col-xs-3" style="padding: 0 0 0;">
         <select id="yearFilter" class="despMov" style="padding: 0 0 0;">
-            <option value="">Todos los años</option>
-            <% for (var i = new Date().getFullYear(); i >= 2015; i--) { %>
-                <option value="<%= i %>" <%= metadata.year != null && i == metadata.year ? 'selected' : '' %>><%= i %></option>
-            <% } %>
         </select>
     </div>
     <div class="col-xs-3" style="padding: 0 0 0;">
@@ -238,10 +46,8 @@
         <a href="/contratacionesabiertas/implementa" class="botonMenuTop">Implementa el EDCA-MX</a>
     </div>
     <div class="col-xs-3" style="padding: 0 0 0;">
-        <a href="https://cotai.org.mx/enlaces-institucionales-de-interes/" class="botonMenuTop" target="_blank">Datos abiertos</a>
+        <a href="/contratacionesabiertas/datosabiertos" class="botonMenuTop">Datos abiertos</a>
     </div>
-    <!-- <div class="col-xs-2">
-    </div> -->
 </div>
  <div class="bgimg bgMovil">
      <div class="container">
@@ -276,9 +82,6 @@
          </div>       
      </div>
  </div>
-
-
-
  <div class="container statistics">
      <div class="row">
          <div class="col-md-12">
@@ -381,8 +184,7 @@
                                                  <th>Monto contratado MXN</th>
                                              </tr>
                                          </thead>
-                                         <tbody>
-                                             
+                                         <tbody>                                             
                                          <% if ( metadata.total_destino[0] ){%>
                                          <tr>
                                              <td> <%= metadata.total_destino[0].additionalprocurementcategories %></td>
@@ -464,8 +266,31 @@
                          </div>
                          <li class="dropdown">       <!--Tamaño del combo filtro Gráfico Información general de contratos y proveedores -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><strong>Filtrar <span class="caret"></span></strong></a>
-                            <ul id="filtros" class="dropdown-menu scrollable-menu container-me">                                
-                                <li class="dropdown-header"><p id="clear_filters" class="clear" style="color:#00cc99; cursor:pointer"><strong>Mostrar/quitar todos</strong></p></li>
+                            <ul id="filtros" class="dropdown-menu scrollable-menu container-me">
+                                <table class="default">
+                                    <tr>
+                                        <td>
+                                            <a class="nameGreen">Proveedor</a><br>
+                                            <input checked=true type="checkbox" class="clear" id="cProveedor"> <a class="selectAll">Seleccionar todo</a>
+                                        </td>
+                                        <td>
+                                            <a class="nameGreen">Procedimiento de contratación</a></br>
+                                            <input checked=true type="checkbox" class="clear" id="cProcedimiento"> <a class="selectAll">Seleccionar todo</a>
+                                        </td>
+                                        <td>
+                                            <a class="nameGreen">Destino de contratación</a><br>
+                                            <input checked=true type="checkbox" class="clear" id="cDestino"> <a class="selectAll">Seleccionar todo</a>
+                                        </td>
+                                        <td>
+                                            <a class="nameGreen">Área requirente</a><br>
+                                            <input checked=true type="checkbox" class="clear" id="cArea"> <a class="selectAll">Seleccionar todo</a>
+                                        </td>
+                                        <td>
+                                            <a class="nameGreen">Vigencia del contrato</a><br>
+                                            <input checked=true type="checkbox" class="clear" id="cVigencia"> <a class="selectAll">Seleccionar todo</a>
+                                        </td>
+                                    </tr>
+                                </table>
                                 <li class="divider"></li>
                                 <div id="filter-list"></div>
                             </ul>
@@ -479,11 +304,9 @@
                              <select id='color-everything-by' class="form-control">
                                  <option value=''>Colorear</option>
                              </select>
-                         </div>
- 
+                         </div> 
                      </ul>
-                 </div>
-                 
+                 </div>                 
              </nav>
              <div class="row">
                  <div class="col-sm-12">
@@ -499,16 +322,20 @@
          </div>
      </div>
  
- 
      <div id="contrataciones_tiempo">
          <h1>Contrataciones en el tiempo (histórico)</h1>
          <p style="font-size: large; padding-bottom: 10px">Visualiza las contrataciones por procedimiento, vigencia, fecha de firma y monto.</p>
          <div class="well series-chart">
-             <div id="series_chart_div" class="row" style="height: 450px;"></div>
-             <p style="text-align: right">Entre más grande es el círculo, mayor es el monto contratado.</p>
+            <div id="series_chart_div" class="row" style="height: 450px;"></div>
+            <ul class="chart-legend navega">
+                <li style="font-size: 17px"><span class="circle" style="background-color: #ffcc00"></span>Licitación pública</li>
+                <li style="font-size: 17px"><span class="circle" style="background-color: #00cc99"></span>Adjudicación directa</li>
+                <li style="font-size: 17px"><span class="circle" style="background-color: #663399"></span>Invitación a cuando menos tres</li>
+            </ul>
+            <br>
+        <p style="text-align: right">Entre más grande es el círculo, mayor es el monto contratado.</p>
          </div>
      </div>
- 
  
      <h1 id="lista">Lista de contrataciones</h1>
      <p style="font-size: large">Busca y explora los datos de las diferentes etapas para cada contratación</p>
@@ -524,20 +351,7 @@
                      <option value="<%= metadata.total_procedimiento[i].procurementmethod_details %>"><%= metadata.total_procedimiento[i].procurementmethod_details %></option>
                      <%}%>
                  </select>
- 				<!--
-                 <select id="stageFilter" class="form-control bootstrap-select">
-                     <option value="">Etapa del procedimiento</option>
-                     <option value="1">Planeación</option>
-                     <option value="2">Licitación</option>
-                     <option value="3">Adjudicación</option>
-                     <option value="4">Contratación</option>
-                     <option value="5">Ejecución</option>
-                 </select>
- 
-                 <select id="statusFilter" class="form-control bootstrap-select">
-                     <option value="">Estatus de la etapa</option>
-                 </select> 
- 				-->
+
                  <select id="orderby" class="form-control bootstrap-select">
                      <option value="exchangerate_amount">Ordenar por monto</option>
                      <option value="title">Ordenar por nombre</option>
@@ -558,10 +372,31 @@
          </div>
      </div>
  </div>  
- 
+ <input id="metadataYear" type="hidden" value="<%= metadata.year %>">
  <dgm-footer></dgm-footer>
  
  <script src="/contratacionesabiertas/static/bower_components/jquery/dist/jquery.min.js"></script>
+ <script>
+    $(document).ready(function() {
+        var uri = globals.site.url;
+        var port = globals.site.port;
+        var endPointFiscalYear = '/edca/fiscalYears';
+        $.ajax({
+            url: `${uri}:${port}${endPointFiscalYear}`,
+            type: 'GET',
+            success: function(data){ 
+                var metadataYear = $('#metadataYear').val();
+                $('#yearFilter').append(`<option value=''>Todos los años</option>`);
+                data.fiscalYears.forEach(element => {
+                    $('#yearFilter').append(`<option value='${element.year}' ${metadataYear != null && element.year == metadataYear ? 'selected' : ''} > ${element.year}</option>`);
+                });
+            },
+            error: function(data) {
+                $('#yearFilter').append('<option value=""> Not Found </option>');
+            }
+        });
+    });
+</script>
  <script type="text/javascript" src="/contratacionesabiertas/static/bower_components/jqplot/jquery.jqplot.js"></script>
  <script type="text/javascript" src="/contratacionesabiertas/static/bower_components/jqplot/plugins/jqplot.barRenderer.js"></script>
  <script type="text/javascript" src="/contratacionesabiertas/static/bower_components/jqplot/plugins/jqplot.donutRenderer.js"></script>
@@ -587,11 +422,9 @@
  
  <script>
  $('.progress-bar').tooltipster({
-     //anchor: 'bottom-left',
      delay : 0,
      contentAsHTML: true,
      minWidth: 150,
-     //maxWidth: 300,
      offset: [20, 20],
      plugins: ['follower'],
      theme: ['tooltipster-default']
@@ -607,4 +440,3 @@
  </script>
  </body>
  </html>
- 

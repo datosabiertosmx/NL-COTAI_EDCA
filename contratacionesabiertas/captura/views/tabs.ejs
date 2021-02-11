@@ -280,9 +280,8 @@ var estatusContrato = [
 					En el caso de procedimientos de contratación financiados con recursos de Organismos Financieros Internacionales, respecto de los procedimientos de lista corta, comparación de precios y adjudicación directa, se señala el número de procedimiento que le asigne la dependencia o entidad correspondiente.'><!--ID-->
 					Identificador de la licitación</label>
                     <br>
-                    <input type="text" class="form-control" name="tenderid" value="<%= tender.tenderid %>" required>
+                    <input type="text" id="nombre-input" onchange="verificar()" class="form-control" name="tenderid" value="<%= tender.tenderid %>" required>
                 </p>
-                
                 <p><label data-tooltip="crear_proceso" title='Denominación del procedimiento de contratación que las dependencias y entidades señalan en CompraNet, en su caso.
 					En el caso de procedimientos de contratación financiados con recursos de Organismos Financieros Internacionales, respecto de los procedimientos de lista corta, comparación de precios y adjudicación directa, se señala la denominación del procedimiento que le asigne la dependencia o entidad correspondiente.'>
 					Denominación de la licitación<!--Title--></label>
@@ -374,7 +373,10 @@ var estatusContrato = [
                     <label data-tooltip="crear_proceso" title='Provee detalles adicionales sobre el método de contratación. Este campo puede ser utilizado para definir nombres locales del tipo de procedimiento de contratación que se utiliza.'>Detalles del método de contratación<!--Procurement method details--></label>
                     <br>
                     
-                    <select name = "procurementmethod_details" class="form-control" onchange="setRelation(metodosContratacion, this, 'procurementmethod'); loadCatalog(justificacionContratacion, this.value, 'procurementmethod_rationale_id'); clearField('procurementmethod_rationale');" required>
+                    <select name = "procurementmethod_details" id = "procurementmethod_details" class="form-control" 
+                        onchange="setRelation(metodosContratacion, this, 'procurementmethod'); 
+                                  loadCatalog(justificacionContratacion, this.value, 'procurementmethod_rationale_id'); 
+                                  clearField('procurementmethod_rationale');" required>
                         <option value = "">Seleccione una opción</option>
                         <option value = "Adjudicación directa" <%= tender.procurementmethod_details == 'Adjudicación directa'?'selected':''%> >Adjudicación directa</option>
                         <option value = "Invitación a cuando menos tres personas" <%= tender.procurementmethod_details == 'Invitación a cuando menos tres personas'?'selected':''%> >Invitación a cuando menos tres personas</option>
@@ -804,10 +806,20 @@ var estatusContrato = [
         }
     }
 
+    //Validar el campo Identificador de la licitación no tenga espacios en blanco
+    function verificar() {
+        var er = new RegExp(/\s/);
+        var licita = document.getElementById('nombre-input').value;
+        if(er.test(licita)){
+            alert('No se permiten espacios en blanco en el campo Identificador de la licitación.');
+            $('[name="tenderid"]').val('');   
+        }
+    }
+
     // Carga el valor deacuerdo a la relacion
     function setIdentifier(select, target, data) {
         var option = select.options[select.selectedIndex];
-        document.getElementsByName(target)[0].value = option.getAttribute(data);
+        document.getElementsByName(target)[0].value = option.getAttribute(data);   
     }
 
     // Limpia el campo
